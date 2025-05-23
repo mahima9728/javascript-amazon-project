@@ -144,6 +144,10 @@
   grid-template-columns: 24px 1fr;
   margin-bottom: 12px;
   cursor: pointer;
+
+  background: #f6f6f6;
+  padding: 8px;
+  border-radius: 6px;
 }
 
 .delivery-option-input {

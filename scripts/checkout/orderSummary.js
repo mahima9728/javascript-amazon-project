@@ -1,4 +1,9 @@
-import { cart, removeFromCart, updateDeliveryOption } from "../../data/cart.js";
+import {
+  cart,
+  removeFromCart,
+  updateDeliveryOption,
+  updateQuantity,
+} from "../../data/cart.js";
 import { products, getProduct } from "../../data/products.js";
 import { formatCurrency } from "../utils/money.js";
 import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js";
@@ -135,16 +140,18 @@ export function renderOrderSummary() {
     });
   });
 }
-
 document.querySelectorAll(".js-update-button").forEach((button) => {
   button.addEventListener("click", () => {
     const productId = button.dataset.productId;
-    const newQuantity = document.querySelector(
+    const input = document.querySelector(
       `.js-quantity-selector[data-product-id="${productId}"]`
-    ).value;
+    );
+    const newQuantity = Number(input.value);
 
-    updateCartQuantity(productId, Number(newQuantity));
-    renderOrderSummary();
-    renderPaymentSummary();
+    if (newQuantity >= 1) {
+      updateQuantity(productId, newQuantity); // this function should update `cart`
+      renderOrderSummary();
+      renderPaymentSummary();
+    }
   });
 });

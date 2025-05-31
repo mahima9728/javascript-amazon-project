@@ -10,7 +10,8 @@ const PORT = 3000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
+app.use(cors());
+app.use(express.json());
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "extra.html"));
 });

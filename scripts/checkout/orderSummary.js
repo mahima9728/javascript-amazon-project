@@ -135,3 +135,16 @@ export function renderOrderSummary() {
     });
   });
 }
+
+document.querySelectorAll(".js-update-button").forEach((button) => {
+  button.addEventListener("click", () => {
+    const productId = button.dataset.productId;
+    const newQuantity = document.querySelector(
+      `.js-quantity-selector[data-product-id="${productId}"]`
+    ).value;
+
+    updateCartQuantity(productId, Number(newQuantity));
+    renderOrderSummary();
+    renderPaymentSummary();
+  });
+});
